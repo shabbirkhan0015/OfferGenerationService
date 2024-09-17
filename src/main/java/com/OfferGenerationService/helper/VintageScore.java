@@ -1,5 +1,6 @@
 package com.OfferGenerationService.helper;
 
+
 public class VintageScore {
 
     public int calculateVintage(Integer grossIncome, Integer loanAmount)
