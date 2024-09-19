@@ -1,4 +1,9 @@
 package com.OfferGenerationService.service;
 
-public class OfferService {
+import org.springframework.stereotype.Service;
+
+
+public interface OfferService {
+    public void generateOffer(String applicationId, Integer LoanAmount);
+
 }
