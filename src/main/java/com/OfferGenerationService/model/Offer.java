@@ -21,5 +21,6 @@ public class Offer {
     private Integer LoanAfterInterest;
     private Integer NumberofMonths;
     private Double emiAmount;
+    private Double aprRtate;
 
 }
