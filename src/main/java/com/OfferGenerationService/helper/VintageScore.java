@@ -1,6 +1,9 @@
 package com.OfferGenerationService.helper;
 
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class VintageScore {
 
     public int calculateVintage(Integer grossIncome, Integer loanAmount)

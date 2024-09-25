@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Offer {
     private String applicationId;
+    private Integer offerId;
     private Double Apr;
     private Integer LoanAmount;
     private Integer LoanAfterInterest;

@@ -1,8 +1,11 @@
 package com.OfferGenerationService.helper;
 
+import org.springframework.stereotype.Component;
+
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class CVPL {
 
     private final Map<String, Integer> cvplMap;

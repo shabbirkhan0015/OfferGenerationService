@@ -1,5 +1,6 @@
 package com.OfferGenerationService.controller;
 
+import com.OfferGenerationService.Request.OfferRequest;
 import com.OfferGenerationService.service.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +17,8 @@ public class OfferController {
     }
 
     @PostMapping("/{applicationId}")
-    public void genenrateOffer(@PathVariable String applicationId, Integer loanAmount)
+    public void genenrateOffer(@PathVariable String applicationId, @RequestBody OfferRequest offerRequest)
     {
-            offerService.generateOffer(applicationId,loanAmount);
+            offerService.generateOffer(applicationId,offerRequest);
     }
 }
