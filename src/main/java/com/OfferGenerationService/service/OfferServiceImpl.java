@@ -2,6 +2,7 @@ package com.OfferGenerationService.service;
 
 import com.OfferGenerationService.Request.OfferRequest;
 import com.OfferGenerationService.helper.CVPL;
+import com.OfferGenerationService.helper.RiskMatrix;
 import com.OfferGenerationService.helper.VintageScore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,9 +18,13 @@ public class OfferServiceImpl implements OfferService {
     @Autowired
     private VintageScore vintageScore;
 
+    @Autowired
+    private RiskMatrix riskMatrix;
+
     private Integer cvplIndex;
     private Integer cvplScore;
-    private Integer vintageScoreResul ;
+    private Integer vintageScoreResult ;
+    private Integer riskIndicator;
 
 
     @Override
@@ -31,6 +36,10 @@ public class OfferServiceImpl implements OfferService {
             cvplScore= cvplMap.get("cvplScore");
             cvplIndex = cvplMap.get("cvplIndex");
         }
-        vintageScoreResul =  vintageScore.calculateVintage(offerRequest.getGrossIncome(),offerRequest.getLoanAmount());
+        vintageScoreResult =  vintageScore.calculateVintage(offerRequest.getGrossIncome(),offerRequest.getLoanAmount());
+        riskIndicator = riskMatrix.getRiskValue(cvplIndex-1, vintageScoreResult-1);
+
+
     }
+
 }
