@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class OfferRequest {
-
     private Integer loanAmount;
     private Integer grossIncome;
 
