@@ -1,12 +1,13 @@
 package com.OfferGenerationService.service;
 
 import com.OfferGenerationService.Request.OfferRequest;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.OfferGenerationService.model.Offer;
+
+import java.util.List;
 
 
 public interface OfferService {
 
-    public void generateOffer(String applicationId, OfferRequest offerRequest);
+    public List<Offer> generateOffer(String applicationId, OfferRequest offerRequest);
 
 }

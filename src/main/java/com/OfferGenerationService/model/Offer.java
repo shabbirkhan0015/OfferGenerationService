@@ -19,7 +19,7 @@ public class Offer {
     private Integer offerId;
     private Double AprRate;
     private Integer LoanAmount;
-    private Integer LoanAfterInterest;
+    private Double LoanAfterInterest;
     private Integer NumberofMonths;
     private Double emiAmount;
 }

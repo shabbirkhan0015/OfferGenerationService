@@ -1,9 +1,12 @@
 package com.OfferGenerationService.controller;
 
 import com.OfferGenerationService.Request.OfferRequest;
+import com.OfferGenerationService.model.Offer;
 import com.OfferGenerationService.service.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/offer")
@@ -18,9 +21,9 @@ public class OfferController {
     }
 
     @PostMapping("/{applicationId}")
-    public void genenrateOffer(@PathVariable String applicationId, @RequestBody OfferRequest offerRequest) {
+    public List<Offer> genenrateOffer(@PathVariable String applicationId, @RequestBody OfferRequest offerRequest) {
 
 
-        offerService.generateOffer(applicationId, offerRequest);
+        return offerService.generateOffer(applicationId, offerRequest);
     }
 }
