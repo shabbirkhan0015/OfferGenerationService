@@ -12,13 +12,15 @@ public class OfferController {
 
     private OfferService offerService;
 
+    @Autowired
     public OfferController(OfferService offerService) {
         this.offerService = offerService;
     }
 
     @PostMapping("/{applicationId}")
-    public void genenrateOffer(@PathVariable String applicationId, @RequestBody OfferRequest offerRequest)
-    {
-            offerService.generateOffer(applicationId,offerRequest);
+    public void genenrateOffer(@PathVariable String applicationId, @RequestBody OfferRequest offerRequest) {
+
+
+        offerService.generateOffer(applicationId, offerRequest);
     }
 }

@@ -17,11 +17,9 @@ import lombok.NoArgsConstructor;
 public class Offer {
     private String applicationId;
     private Integer offerId;
-    private Double Apr;
+    private Double AprRate;
     private Integer LoanAmount;
     private Integer LoanAfterInterest;
     private Integer NumberofMonths;
     private Double emiAmount;
-    private Double aprRtate;
-
 }
