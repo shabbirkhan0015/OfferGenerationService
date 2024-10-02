@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface OfferService {
 
-    public List<Offer> generateOffer(String applicationId, OfferRequest offerRequest);
+    List<Offer> generateOffer(String applicationId, OfferRequest offerRequest);
+    List<Offer> getOffersByApplicationId(String applicationId);
 
 }

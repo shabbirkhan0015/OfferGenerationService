@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/offer")
+@CrossOrigin(origins = "*")
 public class OfferController {
 
 
@@ -25,5 +26,9 @@ public class OfferController {
 
 
         return offerService.generateOffer(applicationId, offerRequest);
+    }
+    @GetMapping("/{applicationId}")
+    public List<Offer> getOffersByApplicationId(@PathVariable String applicationId){
+        return offerService.getOffersByApplicationId(applicationId);
     }
 }

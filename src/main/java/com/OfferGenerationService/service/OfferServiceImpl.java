@@ -16,7 +16,7 @@ public class OfferServiceImpl implements OfferService {
     @Autowired
     private RiskCalculator riskCalculator;
     private Integer riskIndicator;
-
+    private List<Offer> offers;
 
     @Override
     public List<Offer> generateOffer(String applicationId, OfferRequest offerRequest) {
@@ -30,13 +30,13 @@ public class OfferServiceImpl implements OfferService {
         List<Double> aprs = Constants.getAprsOfLoan();
         List<Integer> months = Constants.getNumberOfMonths();
 
-        List<Offer> offerList = StreamUtils.zip(
+        offers = StreamUtils.zip(
                 aprs.stream(),
                 months.stream(),
                 (apr, month) -> calculateOffer(apr, month, offerRequest.getLoanAmount(), applicationId)
         ).toList();
 
-        return  offerList;
+        return  offers;
     }
 
     public Offer calculateOffer(Double apr, Integer month, Integer loanAmount, String applicationId) {
@@ -60,6 +60,11 @@ public class OfferServiceImpl implements OfferService {
         offer.setNumberofMonths(month);
         offer.setLoanAfterInterest(loanAfterInterest);
         return offer;
+    }
+
+    @Override
+    public List<Offer> getOffersByApplicationId(String applicationId){
+        return offers;
     }
 
 }
