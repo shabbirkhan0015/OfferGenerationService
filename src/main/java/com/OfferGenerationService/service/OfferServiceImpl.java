@@ -9,6 +9,7 @@ import org.springframework.data.util.StreamUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class OfferServiceImpl implements OfferService {
@@ -41,8 +42,8 @@ public class OfferServiceImpl implements OfferService {
 
     public Offer calculateOffer(Double apr, Integer month, Integer loanAmount, String applicationId) {
         Offer offer = new Offer();
+        String offerId = UUID.randomUUID().toString().substring(0,7);
         Double rate = apr / 12;
-        int i =1;
         Double aprConst = Math.pow((1 + rate), month);
         double monthlyPayback = (loanAmount * rate * aprConst) / (aprConst - 1);
         monthlyPayback = Math.round(monthlyPayback * 100.0) / 100.0;
@@ -54,7 +55,7 @@ public class OfferServiceImpl implements OfferService {
         loanAfterInterest = Math.round(loanAfterInterest * 100.0) / 100.0;
         offer.setEmiAmount(monthlyPayback);
         offer.setApplicationId(applicationId);
-        offer.setOfferId(i++);
+        offer.setOfferId(offerId);
         offer.setAprRate(apr);
         offer.setLoanAmount(loanAmount);
         offer.setNumberofMonths(month);
