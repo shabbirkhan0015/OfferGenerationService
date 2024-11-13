@@ -1,9 +1,7 @@
 package com.OfferGenerationService.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,12 +14,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 public class Offer {
-    private String applicationId;
     @Id
     private String offerId;
-    private Double AprRate;
-    private Integer LoanAmount;
-    private Double LoanAfterInterest;
-    private Integer NumberofMonths;
+    private Double aprRate;
+    private Integer loanAmount;
+    private Double loanAfterInterest;
+    private Integer numberOfMonths;
     private Double emiAmount;
+    private Boolean selected;
 }
+

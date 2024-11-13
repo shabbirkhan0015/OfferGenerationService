@@ -1,9 +1,13 @@
 package com.OfferGenerationService.service;
 
 import com.OfferGenerationService.Request.OfferRequest;
+import com.OfferGenerationService.Request.OfferUpdateRequest;
 import com.OfferGenerationService.constants.Constants;
 import com.OfferGenerationService.helper.RiskCalculator;
 import com.OfferGenerationService.model.Offer;
+import com.OfferGenerationService.model.OffersforApplication;
+import com.OfferGenerationService.repository.OffersforApplicationRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.StreamUtils;
 import org.springframework.stereotype.Service;
@@ -18,16 +22,14 @@ public class OfferServiceImpl implements OfferService {
     private RiskCalculator riskCalculator;
     private Integer riskIndicator;
     private List<Offer> offers;
+    @Autowired
+    private  OffersforApplicationRepository offersforApplicationRepository;
+
 
     @Override
     public List<Offer> generateOffer(String applicationId, OfferRequest offerRequest) {
 
         riskIndicator = riskCalculator.calculateRisk(offerRequest);
-//        if(riskIndicator == 9)
-//        {
-//            return;
-//        }
-
         List<Double> aprs = Constants.getAprsOfLoan();
         List<Integer> months = Constants.getNumberOfMonths();
 
@@ -48,17 +50,15 @@ public class OfferServiceImpl implements OfferService {
         double monthlyPayback = (loanAmount * rate * aprConst) / (aprConst - 1);
         monthlyPayback = Math.round(monthlyPayback * 100.0) / 100.0;
 
-
         double loanAfterInterest = monthlyPayback * month;
 
 
         loanAfterInterest = Math.round(loanAfterInterest * 100.0) / 100.0;
         offer.setEmiAmount(monthlyPayback);
-        offer.setApplicationId(applicationId);
         offer.setOfferId(offerId);
         offer.setAprRate(apr);
         offer.setLoanAmount(loanAmount);
-        offer.setNumberofMonths(month);
+        offer.setNumberOfMonths(month);
         offer.setLoanAfterInterest(loanAfterInterest);
         return offer;
     }
@@ -66,6 +66,16 @@ public class OfferServiceImpl implements OfferService {
     @Override
     public List<Offer> getOffersByApplicationId(String applicationId){
         return offers;
+    }
+
+
+
+    @Transactional
+    public OffersforApplication saveOffersForApplication(OfferUpdateRequest offers) {
+        OffersforApplication offersforApplication=new OffersforApplication();
+        offersforApplication.setApplicationId(offers.getApplicationId());
+        offersforApplication.setOffers(offers.getOffer());
+        return offersforApplicationRepository.save(offersforApplication);
     }
 
 }
