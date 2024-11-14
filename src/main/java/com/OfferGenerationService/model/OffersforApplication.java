@@ -1,10 +1,12 @@
 package com.OfferGenerationService.model;
 
+import io.hypersistence.utils.hibernate.type.json.JsonType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import java.util.List;
 
@@ -17,9 +19,7 @@ import java.util.List;
 public class OffersforApplication {
     @Id
     private String applicationId;
-
-    // Unidirectional One-to-Many relationship with Offer
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "applicationid") // Creates a foreign key in Offer table
+    @Type(JsonType.class)
+    @Column(columnDefinition = "json")
     private List<Offer> offers;
 }
